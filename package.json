@@ -1,0 +1,23 @@
+{
+  "name": "swproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yerin202044071/swProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yerin202044071/swProject/issues"
+  },
+  "homepage": "https://github.com/Yerin202044071/swProject#readme"
+}
