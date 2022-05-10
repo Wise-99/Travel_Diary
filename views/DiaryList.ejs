@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>여행일기 - Travel Diary</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap');
+            body {
+                font-family : "Gowun Batang";
+            }
+            #menu li{
+                list-style-type : none;
+                float : left;
+                margin-left : 20px;
+
+            }
+            a {
+                text-decoration:none;
+                color : black;
+                font-family:Gowun Batang;
+            }
+
+            #menu li :after {    
+                background: none repeat scroll 0 0 transparent;
+                bottom: 0;
+                content: "";
+                display: block;
+                height: 2px;
+                left: 50%;
+                position: absolute;
+                background: blue;
+                transition: width 0.3s ease 0s, left 0.3s ease 0s;
+                width: 0;
+            }
+
+            #menu li a:hover:after { 
+                width: 100%; 
+                left: 0; 
+            }
+
+            [type=radio]{
+                position: absolute;
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            [type=radio] + img{
+                margin-left: 15px;
+                cursor: pointer;
+            }
+
+            [type=radio]:checked + img{
+                outline: 5px solid rgb(113, 191, 255);
+            }
+            textarea{
+                font-family : "Gowun Batang";
+                margin-left: 15px;
+            }
+
+            table {
+                width: 100%;
+                border: 1px solid #444444;
+                text-align: center;
+            }
+            th, td {
+                border: 1px solid #444444;
+            }
+        </style>
+    </head>
+    <body>
+        <font size="7" style="text-shadow:5px 5px 3px silver"><a href="/">여행일기 - Travels Diary</a></font>
+        <span class="spread-underline" style="position:absolute; right: 30px; top : 30px;">
+            <ul id="menu">
+                <li><a href="/Information">사이트 소개</a></li>
+                <li><a href="/logout">로그아웃</a></li>
+                <li><a href="/DiaryList">일기 목록</a></li>
+                <li><a href="/Top10Page">Top10 페이지</a></li>
+            </ul>
+        </span>
+        <hr>
+<h2>일기 목록</h2>
+<p>목록에서는 대표 사진이 썸네일로 표시됩니다.<br>
+    일기를 공개했을 경우 대표 사진이 10Page에 보여질 수 있습니다.</p>
+<a href="/DiaryAllDelete">[글을 전체 삭제하려면 여기를 누르세요!]</a>
+<br><br>        
+<table>
+        <tr>
+            <th>글번호</th>
+            <th>비공개 여부</th>
+            <th>날짜</th>
+            <th>날씨</th>
+            <th>지역</th>
+            <th>태그</th>
+            <th>내용</th>
+            <th>대표 사진</th>
+            <th>사진들</th>
+            <th>글 삭제</th>
+        </tr>
+        <% for(i = 0; i < rows.length; i++) { %>
+        <tr>
+            <td><%=i+1 %></td>
+            <%if(rows[i].private == "on") {%>
+                <td>비공개</td>
+            <%}else {%>
+                <td>공개</td>
+            <%} %>
+            <td><%=rows[i].date %></td>
+            <td>
+            <% if(rows[i].weather == "sunny"){ %>
+                <img style="width: 30px; height: 30px;" src = "https://cdn-icons-png.flaticon.com/512/2698/2698240.png">
+            <% } if(rows[i].weather == "windy"){ %>
+                <img style="width: 30px; height: 30px;" src = "https://cdn-icons-png.flaticon.com/512/2698/2698232.png">
+            <% } if(rows[i].weather == "rainy"){ %>
+                <img style="width: 30px; height: 30px;" src = "https://cdn-icons-png.flaticon.com/128/2698/2698247.png">
+            <% } if(rows[i].weather == "thunder"){ %>
+                <img style="width: 30px; height: 30px;" src = "https://cdn-icons-png.flaticon.com/128/2698/2698254.png">
+            <% } if(rows[i].weather == "snowy"){ %>
+                <img style="width: 30px; height: 30px;" src = "https://cdn-icons-png.flaticon.com/128/2698/2698245.png">
+            <% } %>
+            <%=rows[i].weather %></td>
+            <td><%=rows[i].area %></td>
+            <td><%=rows[i].tag %></td>
+            <td><%=rows[i].content %></td>
+            <% if(rows[i].img != null){ %>
+                <td><img src="<%=rows[i].img%>" width="200px" height="200px" /></td>
+            <% } %>
+            <td>
+                <% if(imgs[i].img1 != null && imgs[i].img1 != "null"){ %>
+                    <img src="<%=imgs[i].img1%>" width="200px" height="200px"/>
+                <%} if(imgs[i].img2 != null && imgs[i].img2 != "null"){ %>
+                    <img src="<%=imgs[i].img2%>" width="200px" height="200px"/>
+                <%} if(imgs[i].img3 != null && imgs[i].img3 != "null"){ %>
+                    <img src="<%=imgs[i].img3%>" width="200px" height="200px"/>
+                <%} if(imgs[i].img4 != null && imgs[i].img4 != "null"){ %>
+                    <img src="<%=imgs[i].img4%>" width="200px" height="200px"/>
+                <%} %>
+            </td>
+            <td>
+                <form action="/DiaryDelete" method="get">
+                    <input type = "hidden" name = "_id" value = "<%=rows[0].id %>">
+                    <input type = "hidden" name = "private" value = "<%=rows[i].private %>">
+                    <input type = "hidden" name = "date" value = "<%=rows[i].date %>">
+                    <input type = "hidden" name = "weather" value = "<%=rows[i].weather %>">
+                    <input type = "hidden" name = "area" value = "<%=rows[i].area %>">
+                    <input type = "hidden" name = "tag" value = "<%=rows[i].tag %>">
+                    <input type = "hidden" name = "content" value = "<%=rows[i].content %>">
+                    <input type = "submit" value = "글 삭제">
+                </form>
+            </td>
+        </tr>
+        <% } %>
+</table>
+<div style="position:fixed; right: 10px; bottom:10px;">
+    <a href = "/DiaryWrite"><img src="https://cdn-icons-png.flaticon.com/512/3986/3986035.png" width = "80px" height= "80px"></a>
+</div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>여행일기 - Travel Diary</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap');
+            body {
+                font-family : "Gowun Batang";
+            }
+            #menu li{
+                list-style-type : none;
+                float : left;
+                margin-left : 20px;
+
+            }
+            a {
+                text-decoration:none;
+                color : black;
+                font-family:Gowun Batang;
+            }
+
+            #menu li :after {    
+                background: none repeat scroll 0 0 transparent;
+                bottom: 0;
+                content: "";
+                display: block;
+                height: 2px;
+                left: 50%;
+                position: absolute;
+                background: blue;
+                transition: width 0.3s ease 0s, left 0.3s ease 0s;
+                width: 0;
+            }
+
+            #menu li a:hover:after { 
+                width: 100%; 
+                left: 0; 
+            }
+
+            [type=radio]{
+                position: absolute;
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            [type=radio] + img{
+                margin-left: 15px;
+                cursor: pointer;
+            }
+
+            [type=radio]:checked + img{
+                outline: 5px solid rgb(113, 191, 255);
+            }
+            textarea{
+                font-family : "Gowun Batang";
+                margin-left: 15px;
+            }
+            #Top10 {
+                width: 800px;
+                border: 1px solid #444444;
+                margin : auto;
+            }
+            th, td {
+                border: 1px solid #444444;
+            }
+        </style>
+    </head>
+    <body>
+        <font size="7" style="text-shadow:5px 5px 3px silver"><a href="/">여행일기 - Travels Diary</a></font>
+        <span class="spread-underline" style="position:absolute; right: 30px; top : 30px;">
+            <ul id="menu">
+                <li><a href="/Information">사이트 소개</a></li>
+                <li><a href="/logout">로그아웃</a></li>
+                <li><a href="/DiaryList">일기 목록</a></li>
+                <li><a href="/Top10Page">Top10 페이지</a></li>
+            </ul>
+        </span>
+        <hr>
+        <p>여행일기 - Travels Diary 사용자들이 가장 많이 간 여행지를 순서대로 나열한 페이지입니다.</p>
+        <p>비공개한 일기의 사진은 보여지지 않지만 통계 시에는 포함하여 순위를 매깁니다.</p>
+        <p>순위가 같을 경우 가나다 순으로 나열되어 순위가 결정됩니다.</p><br>
+        <p>지역을 클릭하면 다른 사용자들이 공개로 올린 일기를 볼 수 있습니다.</p>
+        <p>여행지 선정 시 도움이 되길 바랍니다!</p>
+        <br><br>
+        <table id = "Top10">
+            <tr>
+                <th>순위</th>
+                <th>지역</th>
+                <th>저장된 일기 수</th>
+            </tr>
+            <% for(i = 0; i < results.length; i++) { %>
+            <tr>
+                <td><%=i+1 %></td>
+                <td><a href="/Top10PageArea?area=<%=results[i].area %>"><%=results[i].area %></a></td>
+                <td><%=results[i].count %></td>
+            </tr>
+            <% if(i == 9) break;%>
+            <% } %>
+    </table>
+    <div style="position:fixed; right: 10px; bottom:10px;">
+        <a href = "/DiaryWrite"><img src="https://cdn-icons-png.flaticon.com/512/3986/3986035.png" width = "80px" height= "80px"></a>
+    </div>
+    <div style="position:fixed; right: 10px; bottom:100px;">
+        <a href = "/DiaryList"><img src="https://cdn-icons-png.flaticon.com/512/3238/3238016.png" width = "80px" height= "80px"></a>
+    </div>
+    </body>
+</html>

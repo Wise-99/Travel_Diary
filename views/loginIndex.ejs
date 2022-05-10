@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>여행일기 - Travel Diary</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap');
+            body {
+                font-family : "Gowun Batang";
+            }
+            #menu li{
+                list-style-type : none;
+                float : left;
+                margin-left : 20px;
+
+            }
+            a {
+                text-decoration:none;
+                color : black;
+                font-family:Gowun Batang;
+            }
+
+            #menu li :after {    
+                background: none repeat scroll 0 0 transparent;
+                bottom: 0;
+                content: "";
+                display: block;
+                height: 2px;
+                left: 50%;
+                position: absolute;
+                background: blue;
+                transition: width 0.3s ease 0s, left 0.3s ease 0s;
+                width: 0;
+            }
+
+            #menu li a:hover:after { 
+                width: 100%; 
+                left: 0; 
+            }
+
+            [type=radio]{
+                position: absolute;
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            [type=radio] + img{
+                margin-left: 15px;
+                cursor: pointer;
+            }
+
+            [type=radio]:checked + img{
+                outline: 5px solid rgb(113, 191, 255);
+            }
+            textarea{
+                font-family : "Gowun Batang";
+                margin-left: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <font size="7" style="text-shadow:5px 5px 3px silver"><a href="/">여행일기 - Travels Diary</a></font>
+        <span class="spread-underline" style="position:absolute; right: 30px; top : 30px;">
+            <ul id="menu">
+                <li><a href="/Information">사이트 소개</a></li>
+                <li><a href="/logout">로그아웃</a></li>
+                <li><a href="/DiaryList">일기 목록</a></li>
+                <li><a href="/Top10Page">Top10 페이지</a></li>
+            </ul>
+        </span>
+        <hr>
+        
+        달성도 : <progress value="<%=gauge.length%>" max="151" id="bar"></progress> <%= Math.round((gauge.length / 151 *100)*100) / 100%>%
+        <div id="map" style="position: fixed; left: 350px; top: 100px; width:1000px; height:700px;"></div>
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9391fe5e1e7e6d6c52d4953932517012&libraries=services"></script>
+        
+        <script>
+            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                mapOption = {
+                    center: new kakao.maps.LatLng(35.831700, 127.124386), // 지도의 중심좌표
+                    level: 13 // 지도의 확대 레벨
+                };  
+            
+            // 지도 생성   
+            var map = new kakao.maps.Map(mapContainer, mapOption); 
+            
+            // 주소-좌표 변환 객체를 생성
+            var geocoder = new kakao.maps.services.Geocoder();
+            var linePath = [];
+        </script>
+        <% for(i = 0; i < rows.length; i++) { %>
+        <script>
+            // 주소로 좌표를 검색합니다
+            geocoder.addressSearch('<%=rows[i].area %>', function(result, status) {
+                // 정상적으로 검색이 완료됐으면 
+                 if (status === kakao.maps.services.Status.OK) {
+                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                    // 결과값으로 받은 위치를 마커로 표시합니다
+                    var marker = new kakao.maps.Marker({
+                        map: map,
+                        position: coords
+                    });
+            
+                    // 인포윈도우로 장소에 대한 설명을 표시합니다
+                    var infowindow = new kakao.maps.InfoWindow({
+                        content: '<div style="width:150px; text-align:center; padding:3px 0;"><a href="/DiaryList"><%=rows[i].date %></a></div>'
+                    });
+                    infowindow.open(map, marker);
+                    linePath.push(coords);
+                } 
+            });
+        </script>
+        <% } %>
+        <div style="position:fixed; right: 10px; bottom:10px;">
+            <a href = "/DiaryWrite"><img src="https://cdn-icons-png.flaticon.com/512/3986/3986035.png" width = "80px" height= "80px"></a>
+        </div>
+        <div style="position:fixed; right: 10px; bottom:100px;">
+            <a href = "/DiaryList"><img src="https://cdn-icons-png.flaticon.com/512/3238/3238016.png" width = "80px" height= "80px"></a>
+        </div>
+    </body>
+    </html>

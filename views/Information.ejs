@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>여행일기 - Travel Diary</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap');
+            body {
+                font-family : "Gowun Batang";
+            }
+            #menu li{
+                list-style-type : none;
+                float : left;
+                margin-left : 20px;
+
+            }
+            a {
+                text-decoration:none;
+                color : black;
+                font-family:Gowun Batang;
+            }
+
+            #menu li :after {    
+                background: none repeat scroll 0 0 transparent;
+                bottom: 0;
+                content: "";
+                display: block;
+                height: 2px;
+                left: 50%;
+                position: absolute;
+                background: blue;
+                transition: width 0.3s ease 0s, left 0.3s ease 0s;
+                width: 0;
+            }
+
+            #menu li a:hover:after { 
+                width: 100%; 
+                left: 0; 
+            }
+
+            [type=radio]{
+                position: absolute;
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            [type=radio] + img{
+                margin-left: 15px;
+                cursor: pointer;
+            }
+
+            [type=radio]:checked + img{
+                outline: 5px solid rgb(113, 191, 255);
+            }
+            textarea{
+                font-family : "Gowun Batang";
+                margin-left: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <font size="7" style="text-shadow:5px 5px 3px silver"><a href="/">여행일기 - Travels Diary</a></font>
+        <span class="spread-underline" style="position:absolute; right: 30px; top : 30px;">
+            <ul id="menu">
+                <li><a href="/Information">사이트 소개</a></li>
+                <li><a href="/Login">로그인</a></li>
+                <li><a href="/DiaryList">일기 목록</a></li>
+                <li><a href="/Top10Page">Top10 페이지</a></li>
+            </ul>
+        </span>
+        <hr>
+<div style="margin-left : 150px;">   
+    <br><br>
+    <p>여행을 다녀온 후, 가끔 어떤 감정을 느꼈었는지 기억이 안나서 사진을 되짚어 보시지 않나요?</p>
+    <p>여행일기 - Travel Diary는 다시 경험하지 못할 감정과 추억을 저장하는 곳이에요.</p>
+    <p>사진과 그 날의 기분, 느낀점 등을 일기로 작성해보세요.</p>
+</div>
+<div style="position:fixed; right: 120px; top:120px; margin-right : 100px;">
+    <img src ="https://cdn-icons-png.flaticon.com/512/3762/3762131.png" width = "250px" height= "200px">
+</div>
+<br><br>
+<hr>
+<div style="margin-left : 150px;">   
+    <br><br>
+    <p><b>여행지역 Top10</b></p>
+    <p>다른 사용자들은 어느 여행지로 떠났을지 참고하고 싶으시다면</p>
+    <p>여행 일기를 통해 확인해보세요!</p>
+</div>
+<div style="position:fixed; right: 130px; top:370px; margin-right : 100px;">
+    <img src ="https://cdn-icons-png.flaticon.com/512/2282/2282594.png" width = "200px" height= "200px">
+</div>
+<br><br>
+<hr>
+<div style="margin-left : 150px;">   
+    <br><br>
+    <p><b>메인 화면의 달성도 표시</b></p>
+    <p>여행일기를 작성한 후 메인화면의 달성도를 확인해보세요.</p>
+</div>
+<div style="position:fixed; right: 130px; top:600px; margin-right : 100px;">
+    <img src ="https://cdn-icons-png.flaticon.com/512/1535/1535019.png" width = "200px" height= "200px">
+</div>
+<br><br>
+</body>
+</html>

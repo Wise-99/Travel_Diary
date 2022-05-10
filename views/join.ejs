@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>여행일기 - Travel Diary</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap');
+            body {
+                font-family : "Gowun Batang";
+            }
+            #menu li{
+                list-style-type : none;
+                float : left;
+                margin-left : 20px;
+
+            }
+            a {
+                text-decoration:none;
+                color : black;
+                font-family:Gowun Batang;
+            }
+
+            #menu li :after {    
+                background: none repeat scroll 0 0 transparent;
+                bottom: 0;
+                content: "";
+                display: block;
+                height: 2px;
+                left: 50%;
+                position: absolute;
+                background: blue;
+                transition: width 0.3s ease 0s, left 0.3s ease 0s;
+                width: 0;
+            }
+
+            #menu li a:hover:after { 
+                width: 100%; 
+                left: 0; 
+            }
+
+            [type=radio]{
+                position: absolute;
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            [type=radio] + img{
+                margin-left: 15px;
+                cursor: pointer;
+            }
+
+            [type=radio]:checked + img{
+                outline: 5px solid rgb(113, 191, 255);
+            }
+            textarea{
+                font-family : "Gowun Batang";
+                margin-left: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <font size="7" style="text-shadow:5px 5px 3px silver"><a href="/">여행일기 - Travels Diary</a></font>
+        <span class="spread-underline" style="position:absolute; right: 30px; top : 30px;">
+            <ul id="menu">
+                <li><a href="/Information.html">사이트 소개</a></li>
+                <li><a href="/Login.html">로그인</a></li>
+                <li><a href="/List">일기 목록</a></li>
+                <li><a href="/Top10Page.html">Top10 페이지</a></li>
+            </ul>
+        </span>
+        <hr>
+<style>
+#login {
+  position:absolute; 
+  box-shadow: 20px 20px 5px grey;
+  width:400px; 
+  height:400px; 
+  top:40%; 
+  left:50%; 
+  margin-top:-50px; 
+  margin-left:-200px;
+  border: 1px solid black;
+  text-align: center;
+}
+
+#login_menu {
+  position:absolute; 
+  top:55%; 
+  left:50%; 
+  margin-top:-50px; 
+  margin-left:-190px;
+}
+
+</style>
+<div id = "login">
+    <br>
+  <h2>Join</h2>
+</div>
+<div id="login_menu">  
+    <form id="userinfo" action="joining" method="post">
+        <table style="margin-left: 60px;">
+            <tr><td>아이디</td><td><input type="text" name="id" placeholder="20자 이내 입력"></td></tr>
+            <tr><td>비밀번호</td><td><input type="password" name="password1" placeholder="20자 이내 입력"></td></tr>
+            <tr><td>비밀번호 확인</td><td><input type="password" name="password2"></td></tr>
+            <tr><td>이름</td><td><input type="text" name="name"></td></tr>
+            <tr><td>생년월일</td><td><input type="text" name="birth" placeholder="예) 20210101"></td></tr>
+            <tr><td><br></td><td></td></tr>
+            <tr><td colspan="2" align="center"><input type="submit" value="회원가입"/></td></tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

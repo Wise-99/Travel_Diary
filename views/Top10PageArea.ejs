@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>여행일기 - Travel Diary</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap');
+            body {
+                font-family : "Gowun Batang";
+            }
+            #menu li{
+                list-style-type : none;
+                float : left;
+                margin-left : 20px;
+
+            }
+            a {
+                text-decoration:none;
+                color : black;
+                font-family:Gowun Batang;
+            }
+
+            #menu li :after {    
+                background: none repeat scroll 0 0 transparent;
+                bottom: 0;
+                content: "";
+                display: block;
+                height: 2px;
+                left: 50%;
+                position: absolute;
+                background: blue;
+                transition: width 0.3s ease 0s, left 0.3s ease 0s;
+                width: 0;
+            }
+
+            #menu li a:hover:after { 
+                width: 100%; 
+                left: 0; 
+            }
+
+            [type=radio]{
+                position: absolute;
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            [type=radio] + img{
+                margin-left: 15px;
+                cursor: pointer;
+            }
+
+            [type=radio]:checked + img{
+                outline: 5px solid rgb(113, 191, 255);
+            }
+            textarea{
+                font-family : "Gowun Batang";
+                margin-left: 15px;
+            }
+            table {
+                border: 1px solid #444444;
+                margin : auto;
+                text-align: center;
+            }
+            th, td {
+                border: 1px solid #444444;
+            }
+            .tb-th-1 {
+                width: 100px;
+            }
+            .tb-th-2 {
+                width: 100px;
+            }
+            .tb-th-3 {
+                width: 30px;
+            }
+            .tb-th-4 {
+                width: 100px;
+            }
+            .tb-th-5 {
+                width: 100px;
+            }
+            .tb-th-6 {
+                width: 300px;
+            }
+            .tb-th-7 {
+                width: 210px;
+            }
+        </style>
+    </head>
+<body>
+    <font size="7" style="text-shadow:5px 5px 3px silver"><a href="/">여행일기 - Travels Diary</a></font>
+    <span class="spread-underline" style="position:absolute; right: 30px; top : 30px;">
+        <ul id="menu">
+            <li><a href="/Information">사이트 소개</a></li>
+            <li><a href="/logout">로그아웃</a></li>
+            <li><a href="/DiaryList">일기 목록</a></li>
+            <li><a href="/Top10Page">Top10 페이지</a></li>
+        </ul>
+    </span>
+    <hr>
+    <h3>Top10 페이지 - <%=rows[0].area %></h3>
+    <table>
+        <tr>
+            <th class = "tb-th-1">작성자</th>
+            <th class = "tb-th-2">날짜</th>
+            <th class = "tb-th-3">날씨</th>
+            <th class = "tb-th-4">지역</th>
+            <th class = "tb-th-5">태그</th>
+            <th class = "tb-th-6">내용</th>
+            <th class = "tb-th-7">대표 사진</th>
+        </tr>
+        <% for(i = 0; i < rows.length; i++) { %>
+            <tr>
+                <td><%=rows[i].id %></td>
+                <td><%=rows[i].date %></td>
+                <td>
+                <% if(rows[i].weather == "sunny"){ %>
+                    <img style="width: 30px; height: 30px;" src = "https://cdn-icons-png.flaticon.com/512/2698/2698240.png">
+                <% } if(rows[i].weather == "windy"){ %>
+                    <img style="width: 30px; height: 30px;" src = "https://cdn-icons-png.flaticon.com/512/2698/2698232.png">
+                <% } if(rows[i].weather == "rainy"){ %>
+                    <img style="width: 30px; height: 30px;" src = "https://cdn-icons-png.flaticon.com/128/2698/2698247.png">
+                <% } if(rows[i].weather == "thunder"){ %>
+                    <img style="width: 30px; height: 30px;" src = "https://cdn-icons-png.flaticon.com/128/2698/2698254.png">
+                <% } if(rows[i].weather == "snowy"){ %>
+                    <img style="width: 30px; height: 30px;" src = "https://cdn-icons-png.flaticon.com/128/2698/2698245.png">
+                <% } %>
+                <%=rows[i].weather %></td>
+                <td><%=rows[i].area %></td>
+                <td><%=rows[i].tag %></td>
+                <td><%=rows[i].content %></td>
+                <% if(rows[i].img != null){ %>
+                <td><img src="<%=rows[i].img%>" width="200px" height="200px" /></td>
+                <% } %>
+            </tr>
+            <% } %>
+    </table>    
+    <div style="position:fixed; right: 10px; bottom:10px;">
+        <a href = "/DiaryWrite"><img src="https://cdn-icons-png.flaticon.com/512/3986/3986035.png" width = "80px" height= "80px"></a>
+    </div>
+    <div style="position:fixed; right: 10px; bottom:100px;">
+        <a href = "/DiaryList"><img src="https://cdn-icons-png.flaticon.com/512/3238/3238016.png" width = "80px" height= "80px"></a>
+    </div>
+</body>
+</html>
